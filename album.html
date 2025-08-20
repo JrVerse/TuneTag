@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="pageTitle">TuneTag</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 800px at 50% -10%, #1c1f26 0%, #0f0f12 50%, #0b0b0d 100%);
+      color: #f7f7fb;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .wrap { width: min(520px, 92vw); margin: 20px auto 48px; text-align: center; }
+    .cover {
+      width: min(340px, 78vw);
+      aspect-ratio: 1/1;
+      margin: 10px auto 22px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1a1f;
+      box-shadow: 0 0 120px #3e376b, 0 0 75px #3e376b;
+    }
+    .cover img { width: 100%; height: 100%; object-fit: cover; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; max-width: 420px; margin: 12px auto; padding: 14px 18px;
+      border-radius: 14px; text-decoration: none; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      transition: transform .05s ease, filter .2s ease;
+    }
+    .btn:active { transform: translateY(1px) scale(.98); filter: brightness(.9); }
+    .youtube { background: #CC0000; color: #fff; }
+    .spotify { background: #1DB954; color: #fff; }
+    .apple { background: #fff; color: #000; }
+    .ytmusic { background: #CC0000; color: #fff; }
+    .btn img { height: 30px; }
+    .btn.youtube img { width: 40px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cover">
+      <img id="albumImage" src="" alt="Album cover">
+    </div>
+    <a id="btnYouTube" class="btn youtube" href="#"><img src="images/youtube-logo.png"> YouTube</a>
+    <a id="btnSpotify" class="btn spotify" href="#"><img src="images/spotify-logo.png"> Spotify</a>
+    <a id="btnApple" class="btn apple" href="#"><img src="images/apple-logo.png"> Apple Music</a>
+    <a id="btnYTMusic" class="btn ytmusic" href="#"><img src="images/ytmusic-logo.png"> YouTube Music</a>
+  </div>
+
+  <script>
+    // Get "id" from URL (example: album.html?id=sour)
+    const params = new URLSearchParams(window.location.search);
+    const albumId = params.get("id");
+
+    if (!albumId) {
+      document.body.innerHTML = "<p style='color:white;text-align:center'>No album selected</p>";
+    } else {
+      // Load albums.json
+      fetch("albums.json")
+        .then(res => res.json())
+        .then(data => {
+          const album = data[albumId];
+          if (!album) {
+            document.body.innerHTML = "<p style='color:white;text-align:center'>Album not found</p>";
+            return;
+          }
+
+          // Fill content
+          document.title = `TuneTag - ${album.title}`;
+          document.getElementById("albumImage").src = "images/" + album.image;
+          document.getElementById("btnYouTube").href = album.youtube;
+          document.getElementById("btnSpotify").href = album.spotify;
+          document.getElementById("btnApple").href = album.apple;
+          document.getElementById("btnYTMusic").href = album.ytmusic;
+        })
+        .catch(err => {
+          console.error("Error loading albums.json", err);
+        });
+    }
+  </script>
+</body>
+</html>
