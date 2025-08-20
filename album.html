@@ -11,9 +11,7 @@
       --text: #f7f7fb;
       --radius: 14px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
-
-      /* Default album glow */
-      --album-glow: #3e376b;
+      --album-glow: #3e376b; /* default glow */
     }
 
     * { box-sizing: border-box; }
@@ -41,11 +39,7 @@
       border-radius: 12px;
       overflow: hidden;
       background: #1a1a1f;
-
-      /* Album glow */
-      box-shadow: 
-        0 0 120px var(--album-glow),
-        0 0 75px var(--album-glow);
+      box-shadow: 0 0 120px var(--album-glow), 0 0 75px var(--album-glow);
     }
 
     .cover img {
@@ -80,7 +74,6 @@
       filter: brightness(.96); 
     }
 
-    /* Platform button colors */
     .youtube { background: #CC0000; color: #fff; }
     .spotify { background: #1DB954; color: #fff; }
     .apple { background: #fff; color: #000; }
@@ -116,50 +109,32 @@
   </div>
 
   <script>
-    /* ========= Album JSON ========= */
-    const albums = {
-      sour: {
-        name: "Sour",
-        cover: "images/sour.jpg",
-        youtubePlaylist: "OLAK5uy_mRc9HLtU_4lp_-MKQNApIRiLwY0M6xoCA",
-        spotifyAlbum: "6s84u2TUpR3wdUv4NgKA2j",
-        appleMusic: "1560735414",
-        ytMusicPlaylist: "OLAK5uy_kEXvla-TA6hgdjALrM04oRCD0xay4xc54",
-        glow: "#3e376b"
-      },
-      guts: {
-        name: "GUTS",
-        cover: "images/guts.jpg",
-        youtubePlaylist: "OLAK5uy_ldvkda_TXNkemSOhB9iYIt5nUWjkTQwIA",
-        spotifyAlbum: "1xJHno7SmdVtZAtXbdbDZp",
-        appleMusic: "1694386825",
-        ytMusicPlaylist: "OLAK5uy_kb-CH5idCHOTq6jKlzaujmLAgUDa77nYQ",
-        glow: "#3e376b"
-      }
-      // Add more albums here
-    };
+    /* ========= Load albums.json dynamically ========= */
+    fetch("albums.json")
+      .then(res => res.json())
+      .then(albums => {
+        const params = new URLSearchParams(window.location.search);
+        const albumKey = params.get('album');
 
-    /* ========= Get album from URL ========= */
-    const urlParams = new URLSearchParams(window.location.search);
-    const albumKey = urlParams.get('album');
+        if (!albumKey || !albums[albumKey]) {
+          alert("Album not found!");
+          return;
+        }
 
-    if (!albumKey || !albums[albumKey]) {
-      alert("Album not found!");
-    } else {
-      const album = albums[albumKey];
+        const album = albums[albumKey];
 
-      // Update album cover and glow
-      document.getElementById('albumImage').src = album.cover;
-      document.documentElement.style.setProperty('--album-glow', album.glow);
+        // Update album cover and glow
+        document.getElementById('albumImage').src = album.cover;
+        document.documentElement.style.setProperty('--album-glow', album.glow);
 
-      // Update buttons dynamically
-      document.getElementById('btnYoutube').onclick = () => openYouTube({ playlistId: album.youtubePlaylist });
-      document.getElementById('btnSpotify').onclick = () => openSpotify({ type: 'album', id: album.spotifyAlbum });
-      document.getElementById('btnApple').onclick = () => openAppleMusic({ id: album.appleMusic });
-      document.getElementById('btnYTMusic').onclick = () => openYouTubeMusic({ playlistId: album.ytMusicPlaylist });
-    }
+        // Update buttons dynamically
+        document.getElementById('btnYoutube').onclick = () => openYouTube({ playlistId: album.youtubePlaylist });
+        document.getElementById('btnSpotify').onclick = () => openSpotify({ type: 'album', id: album.spotifyAlbum });
+        document.getElementById('btnApple').onclick = () => openAppleMusic({ id: album.appleMusic });
+        document.getElementById('btnYTMusic').onclick = () => openYouTubeMusic({ playlistId: album.ytMusicPlaylist });
+      });
 
-    /* ========= Platform + Fallback Navigation (Your existing code) ========= */
+    /* ========= Platform + Fallback Navigation (existing functions) ========= */
     const UA = navigator.userAgent || '';
     const isAndroid = /Android/i.test(UA);
     const isIOS = /iPhone|iPad|iPod/i.test(UA);
