@@ -1,18 +1,20 @@
 {
   "sour": {
-    "title": "Sour - Olivia Rodrigo",
-    "image": "sour.jpg",
-    "youtube": "https://youtube.com/playlist?list=XXXXX",
-    "spotify": "https://open.spotify.com/album/XXXXX",
-    "apple": "https://music.apple.com/us/album/XXXXX",
-    "ytmusic": "https://music.youtube.com/playlist?list=XXXXX"
+    "name": "Sour",
+    "cover": "images/sour.jpg",
+    "youtubePlaylist": "OLAK5uy_mRc9HLtU_4lp_-MKQNApIRiLwY0M6xoCA",
+    "spotifyAlbum": "6s84u2TUpR3wdUv4NgKA2j",
+    "appleMusic": "1560735414",
+    "ytMusicPlaylist": "OLAK5uy_kEXvla-TA6hgdjALrM04oRCD0xay4xc54",
+    "glow": "#3e376b"
   },
-  "emails": {
-    "title": "Emails I Can’t Send - Sabrina Carpenter",
-    "image": "emails.jpg",
-    "youtube": "https://youtube.com/playlist?list=YYYYY",
-    "spotify": "https://open.spotify.com/album/YYYYY",
-    "apple": "https://music.apple.com/us/album/YYYYY",
-    "ytmusic": "https://music.youtube.com/playlist?list=YYYYY"
+  "guts": {
+    "name": "GUTS",
+    "cover": "images/guts.jpg",
+    "youtubePlaylist": "OLAK5uy_ldvkda_TXNkemSOhB9iYIt5nUWjkTQwIA",
+    "spotifyAlbum": "1xJHno7SmdVtZAtXbdbDZp",
+    "appleMusic": "1694386825",
+    "ytMusicPlaylist": "OLAK5uy_kb-CH5idCHOTq6jKlzaujmLAgUDa77nYQ",
+    "glow": "#3e376b"
   }
 }
