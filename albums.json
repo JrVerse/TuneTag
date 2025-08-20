@@ -1,0 +1,18 @@
+{
+  "sour": {
+    "title": "Sour - Olivia Rodrigo",
+    "image": "sour.jpg",
+    "youtube": "https://youtube.com/playlist?list=XXXXX",
+    "spotify": "https://open.spotify.com/album/XXXXX",
+    "apple": "https://music.apple.com/us/album/XXXXX",
+    "ytmusic": "https://music.youtube.com/playlist?list=XXXXX"
+  },
+  "emails": {
+    "title": "Emails I Can’t Send - Sabrina Carpenter",
+    "image": "emails.jpg",
+    "youtube": "https://youtube.com/playlist?list=YYYYY",
+    "spotify": "https://open.spotify.com/album/YYYYY",
+    "apple": "https://music.apple.com/us/album/YYYYY",
+    "ytmusic": "https://music.youtube.com/playlist?list=YYYYY"
+  }
+}
